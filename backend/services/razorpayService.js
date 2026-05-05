@@ -1,3 +1,4 @@
+require('dotenv').config();
 const razorpay = require('razorpay');
 const crypto = require('crypto');
 
@@ -26,8 +27,8 @@ class RazorpayService {
   static async createPlan(planData) {
     try {
       const plan = await instance.plans.create({
-        period: planData.period,
-        interval: planData.frequency,
+        period: planData.frequency, // frequency should be daily/weekly/monthly/yearly
+        interval: planData.period, // period should be an integer
         item: {
           name: planData.name,
           description: planData.description,

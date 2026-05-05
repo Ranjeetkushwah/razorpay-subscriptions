@@ -73,7 +73,7 @@ const createSubscription = async (req, res) => {
     }
 
     // Create Razorpay subscription
-    const startAt = Math.floor(Date.now() / 1000);
+    const startAt = Math.floor((Date.now() + 60000) / 1000); // 1 minute from now
     
     try {
       const razorpaySubscription = await RazorpayService.createSubscription(
@@ -542,7 +542,7 @@ const upgradeSubscription = async (req, res) => {
       await currentSubscription.save();
 
       // Create new subscription
-      const startAt = Math.floor(Date.now() / 1000);
+      const startAt = Math.floor((Date.now() + 60000) / 1000); // 1 minute from now
       const razorpaySubscription = await RazorpayService.createSubscription(
         currentSubscription.razorpayCustomerId,
         newPlan.razorpayPlanId,
